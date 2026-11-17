@@ -73,10 +73,10 @@ Transient (not saved): `ui` = `{view, sheet, addOpen, focusAdd, lastIdx}`. `bloc
 | backdrop art | `@map:art-svg` · `@map:css-art` | art.svg · css/10-layout.css |
 | font stack / where @font-face comes from (CJK-only `unicode-range`) | `@map:css-fonts` | css/00-theme.css (+ tools/build.mjs) |
 | colours / themes | `@map:css-theme` | css/00-theme.css |
-| flat scroll paper (+ faint grain) | `@map:css-scroll` | css/10-layout.css |
-| flat rods (solid bar + 2 knobs) | `@map:css-roller` | css/10-layout.css |
+| scroll paper (grain, fibres, edge shading) | `@map:css-scroll` | css/10-layout.css |
+| wooden rods (gradient bar + 2 end caps) | `@map:css-roller` | css/10-layout.css |
 | focus ring | `@map:css-focus` | css/10-layout.css |
-| brush-glyph style (.gl: Bold + text-stroke, big glyphs only) | `@map:css-brush` | css/20-components.css |
+| brush-glyph style (.gl: weight 400, big glyphs only) | `@map:css-brush` | css/20-components.css |
 | sheet unroll animation | `@map:css-sheet-unroll` | css/10-layout.css |
 | header look | `@map:css-header` | css/20-components.css |
 | block tabs + dots | `@map:css-tabs` | css/20-components.css |
@@ -97,7 +97,7 @@ Transient (not saved): `ui` = `{view, sheet, addOpen, focusAdd, lastIdx}`. `bloc
 | Timer wrong after reload | `S.run` is stored as absolute `end` ms; see `@map:timer`, `@map:tick` |
 | Latin text looks wide/loose | brush font must stay CJK-only: `unicode-range` in tools/build.mjs |
 | Font not applied / tofu boxes | `@map:css-fonts`, `assets/fonts/README.md` (subset coverage), rebuild |
-| Scroll rods/edges look off | `@map:css-roller`, `@map:css-scroll` (flat by design: no gradients/shadows) |
+| Scroll rods/edges look off | `@map:css-roller`, `@map:css-scroll` (13ff8a7 wood + paper look, colours from `@map:css-theme`) |
 | Sheet won't open/close | `@map:css-sheet-unroll` + `@map:render-sheet` (`.open` class) |
 | Data lost between sessions | localStorage is per browser + file path; `@map:export-import` |
 | New string untranslated | `@map:i18n` — add key to BOTH `en` and `zh` |
