@@ -1,0 +1,27 @@
+/* @map:css-fonts — font stack below. The @font-face for "DailyBrush" is injected by tools/build.mjs (CJK-only via unicode-range: its Latin glyphs are too wide/loose, so English uses the serif after it) */
+/* @map:css-theme — design tokens. Three themes switched by <html data-theme="paper|night|warm"> */
+:root{
+  --serif:"DailyBrush","Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Noto Serif TC","Noto Serif CJK TC","Songti TC","Songti SC","STSong","PMingLiU","Source Han Serif TC",Georgia,serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+/* 宣紙 xuan paper: warm beige-yellow (default) */
+:root,[data-theme="paper"]{
+  --wall:#b9a77f;--bg:#efe2bd;--card:#f6ecd0;--ink:#2b2218;--ink2:#5d5039;--ink3:#8a7a5c;
+  --line:rgba(70,50,25,.2);--red:#a4322a;--gold:#b5883a;--jade:#4b7d64;--dark:#2b231b;--darktext:#f1e6c8;
+  --hi:#f8f1db;--sun:#caa05a;--grain:.4;--glass:rgba(247,238,210,.84);
+  --w1:#32200f;--w2:#7d5836;--w3:#a37c4e;--cap:#2a1a0e;--edge:rgba(90,62,25,.3);
+}
+/* 墨夜 night ink */
+[data-theme="night"]{
+  --wall:#0f0d0b;--bg:#26211b;--card:#2f2922;--ink:#ebe2cd;--ink2:#b3a994;--ink3:#7d7464;
+  --line:rgba(235,226,205,.16);--red:#c4473d;--gold:#cfa24d;--jade:#6aa588;--dark:#3b352f;--darktext:#f3ead6;
+  --hi:#3a342e;--sun:#8d7340;--grain:.14;--glass:rgba(42,36,30,.86);
+  --w1:#1a110a;--w2:#4d3823;--w3:#6c4f31;--cap:#0f0905;--edge:rgba(0,0,0,.45);
+}
+/* 暖 warm cork & coffee */
+[data-theme="warm"]{
+  --wall:#c8ab80;--bg:#f1e4cd;--card:#faf0de;--ink:#3a2a1f;--ink2:#6e5a48;--ink3:#9a8670;
+  --line:rgba(58,42,31,.17);--red:#c0552f;--gold:#c58b3a;--jade:#6d7d3c;--dark:#4a3326;--darktext:#f8ecd6;
+  --hi:#fbf3e3;--sun:#e0a56a;--grain:.2;--glass:rgba(250,240,222,.86);
+  --w1:#3a2012;--w2:#8a5a37;--w3:#b0814f;--cap:#2c170b;--edge:rgba(110,70,30,.3);
+}

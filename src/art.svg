@@ -1,0 +1,16 @@
+<!-- @map:art-svg — ink-wash backdrop (sun, three mountain layers, mist, birds). Colours come from CSS variables. -->
+<svg class="art" viewBox="0 0 600 800" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--hi);stop-opacity:0"/><stop offset=".55" style="stop-color:var(--hi);stop-opacity:.6"/><stop offset="1" style="stop-color:var(--hi);stop-opacity:0"/></linearGradient>
+    <filter id="b2"><feGaussianBlur stdDeviation="2.5"/></filter>
+    <filter id="b7"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <circle cx="470" cy="150" r="58" style="fill:var(--sun)" opacity=".5" filter="url(#b7)"/>
+  <circle cx="470" cy="150" r="40" style="fill:var(--sun)" opacity=".35" filter="url(#b2)"/>
+  <path style="fill:var(--ink)" opacity=".07" filter="url(#b2)" d="M0 540 C60 500 90 450 140 480 C190 510 220 420 290 450 C350 475 380 410 440 435 C500 460 540 500 600 470 L600 800 L0 800Z"/>
+  <rect y="500" width="600" height="100" fill="url(#mist)"/>
+  <path style="fill:var(--ink)" opacity=".11" filter="url(#b2)" d="M0 610 C50 580 110 550 170 575 C230 600 260 530 330 550 C400 570 430 610 500 590 C550 575 580 590 600 600 L600 800 L0 800Z"/>
+  <rect y="590" width="600" height="90" fill="url(#mist)"/>
+  <path style="fill:var(--ink)" opacity=".16" d="M0 700 C80 680 140 650 220 675 C300 700 360 660 430 680 C500 700 560 690 600 700 L600 800 L0 800Z"/>
+  <g style="stroke:var(--ink)" fill="none" stroke-width="2" stroke-linecap="round" opacity=".35"><path d="M120 250 q6 -7 12 0 q6 -7 12 0"/><path d="M160 275 q5 -6 10 0 q5 -6 10 0"/><path d="M96 290 q4 -5 8 0 q4 -5 8 0"/></g>
+</svg>

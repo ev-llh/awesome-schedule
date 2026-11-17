@@ -1,0 +1,12 @@
+{
+  "name": "awesome-schedule",
+  "version": "0.2.0",
+  "description": "Daily Brush 日課 — one-file offline ADHD-friendly to-do panel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "check": "node tools/check-map.mjs",
+    "test": "python3 tests/smoke.py"
+  }
+}

@@ -1,0 +1,15 @@
+# personal data / secrets must never reach this public repo
+*backup*.json
+daily-brush-backup*.json
+.env
+.env.*
+*.pem
+*.key
+secrets*
+credentials*
+# tooling noise
+node_modules/
+__pycache__/
+.DS_Store
+.claude/settings.local.json
+tests/shots/
