@@ -1,5 +1,5 @@
-/* @map:css-brush — .gl = brush glyph. ONLY for identity glyphs/titles >= 26px (Bakudai Bold + text-stroke for weight). Never for running text. */
-.gl,.seal,.tab b,.chip b,.ttl b,.clear b,.stamp{font-family:var(--brush);font-weight:700;-webkit-text-stroke:.045em currentColor;line-height:1}
+/* @map:css-brush — .gl = brush glyph. ONLY for identity glyphs/titles >= 26px (DailyBrush at weight 400, no text-stroke). Never for running text. */
+.gl,.seal,.tab b,.chip b,.ttl b,.clear b,.stamp{font-family:var(--brush);line-height:1}
 
 /* @map:css-header — seal, title, clock, icon buttons */
 .top{display:flex;align-items:center;gap:8px}
@@ -7,48 +7,48 @@
 .ttl{flex:1;min-width:0}
 .ttl b{display:block;font-size:30px;letter-spacing:.02em}
 .ttl small{display:block;color:var(--ink3);font-size:13px;margin-top:2px}
-#clock{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink2);margin-right:2px}
-.ib{border:0;background:var(--tile);border-radius:10px;min-width:34px;height:34px;padding:0;display:grid;place-items:center;font-size:19px;color:var(--ink)}
-.ib.txt{font-size:14px;font-weight:700;padding:0 8px}
+#clock{font-size:15px;font-variant-numeric:tabular-nums;color:var(--ink2);margin-right:2px}
+.ib{border:1px solid var(--line);background:var(--tile);border-radius:9px;min-width:30px;height:30px;padding:0;display:grid;place-items:center;font-size:18px;color:var(--ink)}
+.ib.txt{font-size:16px;padding:0 6px}
 .ib:hover{background:var(--line)}
 
 /* @map:css-tabs — 晨 午 夜 tiles: glyph fills the tile (iOS-icon style). dots: hollow ring = pending, solid dot = done (shape, not colour alone) */
 .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 8px}
-.tab{position:relative;border:0;background:var(--tile);border-radius:16px;padding:6px 2px 5px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink)}
-.tab b{font-size:46px}
-.tab small{font-size:13px;font-weight:600;color:var(--ink2);margin-top:1px}
-.tab .dots{display:flex;gap:4px;height:9px;margin-top:3px;align-items:center}
+.tab{position:relative;border:1px solid var(--line);background:var(--tile);border-radius:14px;padding:3px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink)}
+.tab b{font-size:42px}
+.tab small{font-size:15px;line-height:1.15;color:var(--ink2);margin-top:1px}
+.tab .dots{display:flex;gap:4px;height:8px;margin-top:2px;align-items:center}
 .tab .dots i{width:8px;height:8px;border-radius:50%;border:2px solid currentColor;box-sizing:border-box}
-.tab .dots i.d{background:currentColor}
-.tab.on{background:var(--dark);color:var(--darktext)}
+.tab .dots i.d{background:var(--jade);border-color:var(--jade)}
+.tab.on{background:var(--dark);border-color:var(--dark);color:var(--darktext)}
 .tab.on small{color:var(--dt2)}
 .tab em{position:absolute;top:7px;right:7px;width:8px;height:8px;background:var(--btn);border-radius:2px}
 .tab.on em{background:var(--gold)}
-.prog{display:flex;flex-direction:column;gap:5px;font-size:14px;font-weight:600;color:var(--ink2)}
+.prog{display:flex;flex-direction:column;gap:5px;font-size:14px;color:var(--ink2)}
 .brush{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
 .brush i{display:block;height:100%;background:var(--ink);border-radius:3px;transition:width .6s}
 
 /* @map:css-now-card — flat dark "Now" card, step/cue/note fields, timer */
 .peek{font-size:15px;color:var(--ink2);padding:4px 2px}
-.lnk{background:none;border:0;color:var(--red);text-decoration:underline;padding:0;font-size:inherit;font-weight:600}
+.lnk{background:none;border:0;color:var(--red);text-decoration:underline;padding:0;font-size:inherit}
 .now{background:var(--dark);color:var(--darktext);border-radius:18px;padding:16px}
-.now .lab{font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--dt2)}
-.now h2{margin:4px 0 12px;font-size:24px;line-height:1.25;font-weight:700;word-break:break-word}
+.now .lab{font-size:13px;letter-spacing:.12em;color:var(--dt2)}
+.now h2{margin:4px 0 12px;font-size:24px;line-height:1.25;word-break:break-word}
 .fld{display:block;margin-bottom:8px}
-.fld span{display:block;font-size:13px;font-weight:600;color:var(--dt2);margin-bottom:3px}
+.fld span{display:block;font-size:13px;color:var(--dt2);margin-bottom:3px}
 .fld input{width:100%;height:40px;background:var(--field);border:1px solid transparent;border-radius:10px;padding:0 12px;color:var(--darktext);font-size:16px;outline:none}
 .fld input:focus{border-color:var(--gold)}
 .fld input::placeholder{color:var(--ph);opacity:1}
 .btnrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:38px;border:0;background:var(--tile);border-radius:11px;padding:0 14px;font-size:15px;font-weight:600;color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border:1px solid var(--line);background:var(--tile);border-radius:10px;padding:0 10px;font-size:17px;color:var(--ink)}
 .btn:hover{filter:brightness(.95)}
-.btn.primary{background:var(--btn);color:var(--btntext)}
-.now .btn{background:var(--field);color:var(--darktext)}
-.now .btn.primary{background:var(--btn);color:var(--btntext)}
-.now select{height:38px;background:var(--field);color:var(--darktext);border:0;border-radius:11px;padding:0 8px;font-size:15px;font-weight:600}
+.btn.primary{background:var(--btn);border-color:var(--btn);color:var(--btntext)}
+.now .btn{background:var(--field);border-color:rgba(255,255,255,.18);color:var(--darktext)}
+.now .btn.primary{background:var(--btn);border-color:var(--btn);color:var(--btntext)}
+.now select{height:34px;background:var(--field);color:var(--darktext);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:0 6px;font-size:16px}
 .now select option{color:#222}
 .tmr{display:flex;align-items:center;gap:12px;margin-top:6px}
-#tmr{font-size:34px;font-weight:700;font-variant-numeric:tabular-nums}
+#tmr{font-size:34px;font-variant-numeric:tabular-nums}
 #tmr.fin{color:var(--gold);animation:pulse 1.2s infinite}
 .tmr .brush{flex:1;background:var(--field)}
 .tmr .brush i{background:var(--gold)}
@@ -62,22 +62,22 @@
 .chk{flex:none;width:30px;height:30px;border-radius:50%;border:2.5px solid var(--ink2);background:transparent;display:grid;place-items:center;font-size:16px;color:transparent;padding:0}
 .chk:hover{border-color:var(--btn)}
 .row.done .chk{background:var(--btn);border-color:var(--btn);color:var(--btntext)}
-.row .txt{flex:1;min-width:0;word-break:break-word;cursor:pointer;font-size:17px;font-weight:500}
-.row.done .txt{text-decoration:line-through;color:var(--ink2);font-weight:400;cursor:default}
-.tag{font-size:13px;font-weight:700;color:var(--ink2);background:var(--tile);border-radius:6px;padding:1px 6px}
+.row .txt{flex:1;min-width:0;word-break:break-word;cursor:pointer;font-size:17px}
+.row.done .txt{text-decoration:line-through;color:var(--ink2);cursor:default}
+.tag{font-size:13px;color:var(--ink2);background:var(--tile);border-radius:6px;padding:1px 6px}
 .x{background:none;border:0;color:var(--ink2);width:32px;height:32px;display:grid;place-items:center;border-radius:8px;font-size:15px;padding:0}
 .x:hover{color:var(--red);background:var(--tile)}
 .list.done{opacity:.85}
 .clear{padding:20px 16px;text-align:center}
 .clear b{font-size:64px;color:var(--red);display:block;margin-bottom:4px}
 .clear p{margin:0;color:var(--ink2);font-size:16px}
-.addbtn{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;min-height:38px;border:2px dashed var(--ink3);background:transparent;color:var(--ink2);border-radius:11px;padding:0 14px;font-size:15px;font-weight:600}
+.addbtn{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;min-height:34px;border:1.5px dashed var(--ink3);background:transparent;color:var(--ink2);border-radius:10px;padding:0 12px;font-size:17px}
 .addbtn:hover{border-color:var(--btn);color:var(--red)}
 .addf{background:var(--card);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px}
-.addf input[type=text]{width:100%;height:40px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:0 12px;outline:none;font-size:16px}
+.addf input[type=text]{width:100%;height:40px;background:var(--hi);border:1px solid var(--line);border-radius:10px;padding:0 12px;outline:none;font-size:16px}
 .addf input[type=text]:focus,.park input:focus{border-color:var(--btn)}
 .addrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.addrow select,.set select{height:38px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:0 8px;font-size:15px}
+.addrow select,.set select{height:34px;background:var(--hi);border:1px solid var(--line);border-radius:10px;padding:0 8px;font-size:15px}
 .addrow label{font-size:15px;color:var(--ink2);display:flex;gap:6px;align-items:center}
 
 /* @map:css-footer — parking input + three tiles 後 念 常 (iOS-style red count badge) */
@@ -85,22 +85,22 @@
 .park input{width:100%;height:42px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 14px;outline:none;font-size:16px}
 .park input::placeholder{color:var(--ink3);opacity:1}
 .chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.chip{position:relative;border:0;background:var(--tile);border-radius:14px;padding:4px 2px;min-height:50px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink)}
-.chip b{font-size:34px}
-.chip small{font-size:12px;font-weight:600;color:var(--ink2)}
-.chip u{position:absolute;top:-5px;right:-3px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--btn);color:var(--btntext);font-size:12px;font-weight:700;text-decoration:none;display:grid;place-items:center}
+.chip{position:relative;border:1px solid var(--line);background:var(--tile);border-radius:12px;padding:2px;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink)}
+.chip b{font-size:32px}
+.chip small{font-size:14px;line-height:1.15;color:var(--ink2)}
+.chip u{position:absolute;top:-5px;right:-3px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--btn);color:var(--btntext);font-size:12px;text-decoration:none;display:grid;place-items:center}
 
 /* @map:css-sheet-content — inside the unrolled sheet */
 .empty{color:var(--ink2);text-align:center;padding:22px 0}
 .srow{display:flex;gap:8px;align-items:center;padding:8px 2px;border-bottom:1px solid var(--line);font-size:16px}
 .srow span{flex:1;min-width:0;word-break:break-word}
-.srow small{color:var(--ink2);font-family:var(--brush);font-weight:700;font-size:22px;-webkit-text-stroke:.04em currentColor}
+.srow small{color:var(--ink2);font-family:var(--brush);font-size:22px}
 .set{display:grid;grid-template-columns:1fr auto;gap:10px 12px;align-items:center;padding:4px 2px}
 .set label{color:var(--ink2);font-size:16px}
 .set input[type=checkbox]{width:22px;height:22px;accent-color:var(--btn)}
 
 /* @map:css-toast-stamp — toast and the red completion seal */
-#toast{position:absolute;left:50%;bottom:150px;transform:translate(-50%,12px);background:var(--dark);color:var(--darktext);padding:10px 16px;border-radius:12px;font-size:15px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:88%;text-align:center}
+#toast{position:absolute;left:50%;bottom:150px;transform:translate(-50%,12px);background:var(--dark);color:var(--darktext);padding:10px 16px;border-radius:12px;font-size:15px;opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:88%;text-align:center}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 .stamp{position:absolute;left:50%;top:40%;z-index:50;pointer-events:none;color:var(--red);border:5px solid var(--red);border-radius:10px;padding:6px 16px;font-size:84px;opacity:0;animation:press 1.05s ease-out forwards}
 @keyframes press{0%{opacity:0;transform:translate(-50%,-50%) scale(2.1) rotate(-12deg)}18%{opacity:.92;transform:translate(-50%,-50%) scale(1) rotate(-6deg)}70%{opacity:.85;transform:translate(-50%,-50%) scale(1) rotate(-6deg)}100%{opacity:0;transform:translate(-50%,-50%) scale(.97) rotate(-6deg)}}
