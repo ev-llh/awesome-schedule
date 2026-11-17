@@ -17,8 +17,14 @@ Context: personal tool for an adult with ADHD who abandons a to-do list once it 
 Not evidence-based claims to avoid repeating: "23 minutes to refocus" (untraceable); "object permanence" is slang — the real construct is prospective memory.
 A to-do app is a prosthetic, not a treatment. Strongest treatment evidence: medication and CBT for adult ADHD (time-management / planning skills).
 
-## Visual language
-宣紙 (xuan paper) beige, ink-wash mountains, vermilion seal accents, a 卷軸 scroll shell (wooden rods; sheets unroll like a second scroll). Identifiers are one glyph (晨 午 夜 後 念 常). Font: DailyBrush (Bakudai subset, OFL).
+## Visual language (revised after UI/UX review)
+宣紙 (xuan paper) beige, one flat 卷軸 scroll shell (two solid thin rods; sheets unroll like a second scroll), vermilion accents. Identifiers are one glyph (晨 午 夜 後 念 常) and **fill their tile** (iOS-icon style); counts are red badges.
+- **Two typefaces on purpose.** DailyBrush (Bakudai **Bold** subset, OFL) + `-webkit-text-stroke:.045em` is used only for glyphs/titles >= 26px (`@map:css-brush`). All running text, captions, inputs and buttons use the system UI font: a brush face is not legible at 14-18px (tested Regular/Medium/Bold; Bold + stroke is the thickest that stays clean).
+- **Flat, not skeuomorphic.** The 3D wooden rods were rejected: the review data lists Skeuomorphism as "not for web / low performance", Flat Design as a fit for productivity apps. Rods are now one solid bar + two flat knobs; no gradients, no shadows.
+- **Less decoration** (excess decoration is a listed anti-pattern): birds, sun blur, fibre lines and edge shading removed; only two faint flat mountain layers + very light grain remain.
+- **Rejected: "Habit Tracker" style** (streaks, gamification) — conflicts with the no-overdue / no-streak / no-guilt rule above. ADHD rules are unchanged.
+- **Accessibility:** text >= 4.5:1 in all three themes (`python3 tools/contrast.py`, currently ALL PASS), body >= 16px, captions >= 12-13px, `:focus-visible` ring, SVG icons instead of text glyphs, tab dots by shape (hollow = pending, solid = done) not colour alone, `prefers-reduced-motion` honoured. Buttons are smaller (38px) but every hit area stays >= 30px.
+- Review method: the ui-ux-pro-max-skill CSV catalogues (MIT) were read as data only; none of its scripts were run.
 
 ## Key sources
 - Barkley / CHADD executive function: https://chadd.org/about-adhd/executive-function-skills

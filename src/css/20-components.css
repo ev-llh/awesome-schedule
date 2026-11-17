@@ -1,104 +1,106 @@
+/* @map:css-brush — .gl = brush glyph. ONLY for identity glyphs/titles >= 26px (Bakudai Bold + text-stroke for weight). Never for running text. */
+.gl,.seal,.tab b,.chip b,.ttl b,.clear b,.stamp{font-family:var(--brush);font-weight:700;-webkit-text-stroke:.045em currentColor;line-height:1}
+
 /* @map:css-header — seal, title, clock, icon buttons */
-.top{display:flex;align-items:center;gap:10px}
-.seal{width:36px;height:36px;border-radius:5px;background:var(--red);color:#f6e9d2;display:grid;place-items:center;font-size:21px;transform:rotate(-3deg);box-shadow:inset 0 0 0 2px rgba(255,255,255,.18);flex:none}
+.top{display:flex;align-items:center;gap:8px}
+.seal{width:44px;height:44px;border-radius:11px;background:var(--btn);color:var(--btntext);display:grid;place-items:center;font-size:32px;flex:none}
 .ttl{flex:1;min-width:0}
-.ttl b{display:block;font-size:22px;font-weight:400;letter-spacing:.04em;line-height:1.1}
-.ttl small{color:var(--ink3);font-size:13px;letter-spacing:.03em}
-#clock{font-family:var(--mono);font-size:13px;color:var(--ink2);margin-right:2px}
-.ib{border:1px solid var(--line);background:var(--glass);border-radius:8px;min-width:32px;height:30px;padding:0 8px;font-size:13px;letter-spacing:.04em}
-.ib:hover{border-color:var(--ink3)}
+.ttl b{display:block;font-size:30px;letter-spacing:.02em}
+.ttl small{display:block;color:var(--ink3);font-size:13px;margin-top:2px}
+#clock{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink2);margin-right:2px}
+.ib{border:0;background:var(--tile);border-radius:10px;min-width:34px;height:34px;padding:0;display:grid;place-items:center;font-size:19px;color:var(--ink)}
+.ib.txt{font-size:14px;font-weight:700;padding:0 8px}
+.ib:hover{background:var(--line)}
 
-/* @map:css-tabs — one-glyph block tabs 晨 午 夜, dots = items in the block */
-.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 8px}
-.tab{position:relative;border:1px solid var(--line);background:var(--glass);border-radius:10px;padding:7px 4px 6px;display:flex;flex-direction:column;align-items:center;line-height:1.15}
-.tab b{font-size:26px;font-weight:400}
-.tab small{font-size:11px;color:var(--ink3);letter-spacing:.05em}
-.tab .dots{display:flex;gap:4px;height:9px;margin-top:4px;align-items:center}
-.tab .dots i{width:7px;height:7px;border-radius:50%;border:1.5px solid var(--ink3)}
-.tab .dots i.p{background:var(--ink);border-color:var(--ink)}
-.tab .dots i.d{background:var(--jade);border-color:var(--jade)}
-.tab.on{background:var(--dark);border-color:var(--dark);color:var(--darktext)}
-.tab.on small{color:var(--darktext);opacity:.7}
-.tab.on .dots i{border-color:var(--darktext)}
-.tab.on .dots i.p{background:var(--darktext)}
-.tab.on .dots i.d{background:var(--jade);border-color:var(--jade)}
-.tab em{position:absolute;top:5px;right:6px;width:7px;height:7px;background:var(--red);border-radius:1px;transform:rotate(12deg)}
-.prog{display:flex;flex-direction:column;gap:5px;font-size:13px;color:var(--ink2)}
-.brush{height:8px;border-radius:8px;background:var(--line);overflow:hidden}
-.brush i{display:block;height:100%;background:linear-gradient(90deg,var(--ink) 0,var(--ink) 72%,transparent 100%);border-radius:8px;filter:url(#rough);transition:width .6s}
+/* @map:css-tabs — 晨 午 夜 tiles: glyph fills the tile (iOS-icon style). dots: hollow ring = pending, solid dot = done (shape, not colour alone) */
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 8px}
+.tab{position:relative;border:0;background:var(--tile);border-radius:16px;padding:6px 2px 5px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink)}
+.tab b{font-size:46px}
+.tab small{font-size:13px;font-weight:600;color:var(--ink2);margin-top:1px}
+.tab .dots{display:flex;gap:4px;height:9px;margin-top:3px;align-items:center}
+.tab .dots i{width:8px;height:8px;border-radius:50%;border:2px solid currentColor;box-sizing:border-box}
+.tab .dots i.d{background:currentColor}
+.tab.on{background:var(--dark);color:var(--darktext)}
+.tab.on small{color:var(--dt2)}
+.tab em{position:absolute;top:7px;right:7px;width:8px;height:8px;background:var(--btn);border-radius:2px}
+.tab.on em{background:var(--gold)}
+.prog{display:flex;flex-direction:column;gap:5px;font-size:14px;font-weight:600;color:var(--ink2)}
+.brush{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.brush i{display:block;height:100%;background:var(--ink);border-radius:3px;transition:width .6s}
 
-/* @map:css-now-card — the dark "Now" card, step/cue/note fields, timer */
-.peek{font-size:13.5px;color:var(--ink2);padding:4px 2px}
-.lnk{background:none;border:0;color:var(--red);text-decoration:underline;padding:0;font-size:inherit}
-.now{position:relative;background:var(--dark);color:var(--darktext);border-radius:14px;padding:16px 16px 14px;box-shadow:0 10px 26px rgba(0,0,0,.22);overflow:hidden}
-.now::after{content:"";position:absolute;right:-40px;top:-50px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.1),transparent 65%);pointer-events:none}
-.now .motto{position:absolute;right:12px;top:12px;font-style:normal;writing-mode:vertical-rl;letter-spacing:.35em;font-size:16px;opacity:.3}
-.now .lab{font-size:12px;letter-spacing:.16em;opacity:.7}
-.now h2{margin:4px 30px 10px 0;font-size:23px;line-height:1.3;font-weight:400;word-break:break-word}
+/* @map:css-now-card — flat dark "Now" card, step/cue/note fields, timer */
+.peek{font-size:15px;color:var(--ink2);padding:4px 2px}
+.lnk{background:none;border:0;color:var(--red);text-decoration:underline;padding:0;font-size:inherit;font-weight:600}
+.now{background:var(--dark);color:var(--darktext);border-radius:18px;padding:16px}
+.now .lab{font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--dt2)}
+.now h2{margin:4px 0 12px;font-size:24px;line-height:1.25;font-weight:700;word-break:break-word}
 .fld{display:block;margin-bottom:8px}
-.fld span{display:block;font-size:12px;letter-spacing:.05em;opacity:.7;margin-bottom:2px}
-.fld input{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:7px;padding:6px 9px;color:var(--darktext);font-size:15px;outline:none}
+.fld span{display:block;font-size:13px;font-weight:600;color:var(--dt2);margin-bottom:3px}
+.fld input{width:100%;height:40px;background:var(--field);border:1px solid transparent;border-radius:10px;padding:0 12px;color:var(--darktext);font-size:16px;outline:none}
 .fld input:focus{border-color:var(--gold)}
-.fld input::placeholder{color:var(--darktext);opacity:.35}
-.btnrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
-.btn{border:1px solid var(--line);background:var(--glass);border-radius:8px;padding:7px 13px;font-size:15px}
-.btn:hover{border-color:var(--ink3)}
-.btn.primary{background:var(--red);border-color:var(--red);color:#f8ecd8}
-.now .btn{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.18);color:var(--darktext)}
-.now .btn.primary{background:var(--red);border-color:var(--red)}
-.now select{background:rgba(255,255,255,.09);color:var(--darktext);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:6px 4px;font-size:14px}
+.fld input::placeholder{color:var(--ph);opacity:1}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:38px;border:0;background:var(--tile);border-radius:11px;padding:0 14px;font-size:15px;font-weight:600;color:var(--ink)}
+.btn:hover{filter:brightness(.95)}
+.btn.primary{background:var(--btn);color:var(--btntext)}
+.now .btn{background:var(--field);color:var(--darktext)}
+.now .btn.primary{background:var(--btn);color:var(--btntext)}
+.now select{height:38px;background:var(--field);color:var(--darktext);border:0;border-radius:11px;padding:0 8px;font-size:15px;font-weight:600}
 .now select option{color:#222}
 .tmr{display:flex;align-items:center;gap:12px;margin-top:6px}
-#tmr{font-family:var(--mono);font-size:26px;letter-spacing:.04em}
+#tmr{font-size:34px;font-weight:700;font-variant-numeric:tabular-nums}
 #tmr.fin{color:var(--gold);animation:pulse 1.2s infinite}
-.tmr .brush{flex:1;background:rgba(255,255,255,.14)}
-.tmr .brush i{background:linear-gradient(90deg,var(--gold) 0,var(--gold) 70%,transparent 100%)}
-@keyframes pulse{50%{opacity:.35}}
+.tmr .brush{flex:1;background:var(--field)}
+.tmr .brush i{background:var(--gold)}
+@keyframes pulse{50%{opacity:.4}}
 
 /* @map:css-rows — task rows, empty state, add button/form */
-.card,.list{background:var(--glass);border:1px solid var(--line);border-radius:12px}
-.list{padding:2px 4px}
-.row{display:flex;align-items:center;gap:10px;padding:9px 8px;border-bottom:1px solid var(--line)}
+.card,.list{background:var(--card);border-radius:16px}
+.list{padding:2px 6px}
+.row{display:flex;align-items:center;gap:10px;padding:8px 6px;border-bottom:1px solid var(--line);min-height:48px}
 .row:last-child{border-bottom:0}
-.chk{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid var(--ink2);background:transparent;display:grid;place-items:center;font-size:13px;color:transparent;padding:0}
-.chk:hover{border-color:var(--red)}
-.row.done .chk{background:var(--red);border-color:var(--red);color:#f8ecd8}
-.row .txt{flex:1;min-width:0;word-break:break-word;cursor:pointer}
-.row.done .txt{text-decoration:line-through;color:var(--ink3);cursor:default}
-.tag{font-size:12px;color:var(--ink3);border:1px solid var(--line);border-radius:4px;padding:0 4px}
-.x{background:none;border:0;color:var(--ink3);font-size:19px;line-height:1;padding:2px 6px;opacity:.55}
-.x:hover{opacity:1;color:var(--red)}
-.list.done{opacity:.8}
-.clear{padding:22px 16px;text-align:center}
-.clear b{font-size:40px;font-weight:400;color:var(--red);display:block;margin-bottom:2px}
-.clear p{margin:0;color:var(--ink2)}
-.addbtn{align-self:flex-start;border:1px dashed var(--ink3);background:transparent;color:var(--ink2);border-radius:10px;padding:7px 14px;font-size:15px}
-.addbtn:hover{border-color:var(--red);color:var(--red)}
-.addf{background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px}
-.addf input[type=text]{width:100%;background:var(--hi);border:1px solid var(--line);border-radius:8px;padding:8px 10px;outline:none}
-.addf input[type=text]:focus,.park input:focus{border-color:var(--red)}
+.chk{flex:none;width:30px;height:30px;border-radius:50%;border:2.5px solid var(--ink2);background:transparent;display:grid;place-items:center;font-size:16px;color:transparent;padding:0}
+.chk:hover{border-color:var(--btn)}
+.row.done .chk{background:var(--btn);border-color:var(--btn);color:var(--btntext)}
+.row .txt{flex:1;min-width:0;word-break:break-word;cursor:pointer;font-size:17px;font-weight:500}
+.row.done .txt{text-decoration:line-through;color:var(--ink2);font-weight:400;cursor:default}
+.tag{font-size:13px;font-weight:700;color:var(--ink2);background:var(--tile);border-radius:6px;padding:1px 6px}
+.x{background:none;border:0;color:var(--ink2);width:32px;height:32px;display:grid;place-items:center;border-radius:8px;font-size:15px;padding:0}
+.x:hover{color:var(--red);background:var(--tile)}
+.list.done{opacity:.85}
+.clear{padding:20px 16px;text-align:center}
+.clear b{font-size:64px;color:var(--red);display:block;margin-bottom:4px}
+.clear p{margin:0;color:var(--ink2);font-size:16px}
+.addbtn{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;min-height:38px;border:2px dashed var(--ink3);background:transparent;color:var(--ink2);border-radius:11px;padding:0 14px;font-size:15px;font-weight:600}
+.addbtn:hover{border-color:var(--btn);color:var(--red)}
+.addf{background:var(--card);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.addf input[type=text]{width:100%;height:40px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:0 12px;outline:none;font-size:16px}
+.addf input[type=text]:focus,.park input:focus{border-color:var(--btn)}
 .addrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.addrow select,.set select{background:var(--hi);border:1px solid var(--line);border-radius:8px;padding:6px}
-.addrow label{font-size:14px;color:var(--ink2);display:flex;gap:4px;align-items:center}
+.addrow select,.set select{height:38px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:0 8px;font-size:15px}
+.addrow label{font-size:15px;color:var(--ink2);display:flex;gap:6px;align-items:center}
 
-/* @map:css-footer — parking input + three chips (後 念 常) */
+/* @map:css-footer — parking input + three tiles 後 念 常 (iOS-style red count badge) */
 .park{margin-bottom:8px}
-.park input{width:100%;background:var(--glass);border:1px solid var(--line);border-radius:10px;padding:9px 12px;outline:none}
+.park input{width:100%;height:42px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 14px;outline:none;font-size:16px}
+.park input::placeholder{color:var(--ink3);opacity:1}
 .chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.chip{border:1px solid var(--line);background:var(--glass);border-radius:10px;padding:6px 4px;font-size:14px;color:var(--ink2)}
-.chip b{font-size:19px;font-weight:400;color:var(--ink);margin-right:3px}
-.chip u{text-decoration:none;color:var(--red);margin-left:3px}
+.chip{position:relative;border:0;background:var(--tile);border-radius:14px;padding:4px 2px;min-height:50px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink)}
+.chip b{font-size:34px}
+.chip small{font-size:12px;font-weight:600;color:var(--ink2)}
+.chip u{position:absolute;top:-5px;right:-3px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--btn);color:var(--btntext);font-size:12px;font-weight:700;text-decoration:none;display:grid;place-items:center}
 
 /* @map:css-sheet-content — inside the unrolled sheet */
-.empty{color:var(--ink3);text-align:center;padding:22px 0}
-.srow{display:flex;gap:8px;align-items:center;padding:8px 2px;border-bottom:1px solid var(--line)}
+.empty{color:var(--ink2);text-align:center;padding:22px 0}
+.srow{display:flex;gap:8px;align-items:center;padding:8px 2px;border-bottom:1px solid var(--line);font-size:16px}
 .srow span{flex:1;min-width:0;word-break:break-word}
-.srow small{color:var(--ink3)}
+.srow small{color:var(--ink2);font-family:var(--brush);font-weight:700;font-size:22px;-webkit-text-stroke:.04em currentColor}
 .set{display:grid;grid-template-columns:1fr auto;gap:10px 12px;align-items:center;padding:4px 2px}
-.set label{color:var(--ink2);font-size:15px}
+.set label{color:var(--ink2);font-size:16px}
+.set input[type=checkbox]{width:22px;height:22px;accent-color:var(--btn)}
 
 /* @map:css-toast-stamp — toast and the red completion seal */
-#toast{position:absolute;left:50%;bottom:128px;transform:translate(-50%,12px);background:var(--dark);color:var(--darktext);padding:8px 14px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:88%;text-align:center}
+#toast{position:absolute;left:50%;bottom:150px;transform:translate(-50%,12px);background:var(--dark);color:var(--darktext);padding:10px 16px;border-radius:12px;font-size:15px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:88%;text-align:center}
 #toast.on{opacity:1;transform:translate(-50%,0)}
-.stamp{position:absolute;left:50%;top:40%;z-index:50;pointer-events:none;color:var(--red);border:4px solid var(--red);border-radius:6px;padding:2px 14px;font-size:86px;line-height:1.1;opacity:0;animation:press 1.05s ease-out forwards}
-@keyframes press{0%{opacity:0;transform:translate(-50%,-50%) scale(2.3) rotate(-14deg)}18%{opacity:.92;transform:translate(-50%,-50%) scale(1) rotate(-8deg)}70%{opacity:.85;transform:translate(-50%,-50%) scale(1) rotate(-8deg)}100%{opacity:0;transform:translate(-50%,-50%) scale(.97) rotate(-8deg)}}
+.stamp{position:absolute;left:50%;top:40%;z-index:50;pointer-events:none;color:var(--red);border:5px solid var(--red);border-radius:10px;padding:6px 16px;font-size:84px;opacity:0;animation:press 1.05s ease-out forwards}
+@keyframes press{0%{opacity:0;transform:translate(-50%,-50%) scale(2.1) rotate(-12deg)}18%{opacity:.92;transform:translate(-50%,-50%) scale(1) rotate(-6deg)}70%{opacity:.85;transform:translate(-50%,-50%) scale(1) rotate(-6deg)}100%{opacity:0;transform:translate(-50%,-50%) scale(.97) rotate(-6deg)}}

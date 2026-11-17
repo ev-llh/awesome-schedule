@@ -1,27 +1,30 @@
-/* @map:css-fonts — font stack below. The @font-face for "DailyBrush" is injected by tools/build.mjs (CJK-only via unicode-range: its Latin glyphs are too wide/loose, so English uses the serif after it) */
-/* @map:css-theme — design tokens. Three themes switched by <html data-theme="paper|night|warm"> */
+/* @map:css-fonts — two faces. --brush = DailyBrush (CJK-only, injected by tools/build.mjs): identity glyphs & large titles ONLY, thickened with a text-stroke (see .gl).
+   --sans = system UI font: all running text, captions, inputs (the brush is illegible below ~22px). */
 :root{
-  --serif:"DailyBrush","Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,"Noto Serif TC","Noto Serif CJK TC","Songti TC","Songti SC","STSong","PMingLiU","Source Han Serif TC",Georgia,serif;
-  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --brush:"DailyBrush",system-ui,-apple-system,"Segoe UI",Roboto,"PingFang TC","Noto Sans TC","Noto Sans CJK TC","Microsoft JhengHei",sans-serif;
+  --sans:system-ui,-apple-system,"SF Pro Text","Segoe UI",Roboto,"PingFang TC","Noto Sans TC","Noto Sans CJK TC","Microsoft JhengHei",sans-serif;
 }
+/* @map:css-theme — flat colour tokens. Three themes via <html data-theme="paper|night|warm">.
+   RULE: every text token pair must be >= 4.5:1 → verify with `python3 tools/contrast.py` after any change.
+   bg/card/tile = surfaces · ink/ink2/ink3 = text · btn/btntext = primary button · dark/darktext/dt2/field/ph/gold = the Now card (always dark) · rod/rod2/mount/edge = scroll */
 /* 宣紙 xuan paper: warm beige-yellow (default) */
 :root,[data-theme="paper"]{
-  --wall:#b9a77f;--bg:#efe2bd;--card:#f6ecd0;--ink:#2b2218;--ink2:#5d5039;--ink3:#8a7a5c;
-  --line:rgba(70,50,25,.2);--red:#a4322a;--gold:#b5883a;--jade:#4b7d64;--dark:#2b231b;--darktext:#f1e6c8;
-  --hi:#f8f1db;--sun:#caa05a;--grain:.4;--glass:rgba(247,238,210,.84);
-  --w1:#32200f;--w2:#7d5836;--w3:#a37c4e;--cap:#2a1a0e;--edge:rgba(90,62,25,.3);
+  --wall:#a99872;--bg:#f0e4c2;--card:#f8f0d8;--tile:#e7d9b1;--mount:#e0d1a4;--line:rgba(70,50,25,.16);--edge:rgba(70,50,25,.3);
+  --ink:#2a2118;--ink2:#54462f;--ink3:#6a5b41;--red:#9c2b24;--btn:#a3322a;--btntext:#fff3dc;
+  --dark:#2a231b;--darktext:#f3e9cc;--dt2:#cdbf9f;--field:#3b3329;--ph:#b8aa8c;--gold:#dcab4a;
+  --rod:#5a4331;--rod2:#3a291c;--grain:.22;
 }
 /* 墨夜 night ink */
 [data-theme="night"]{
-  --wall:#0f0d0b;--bg:#26211b;--card:#2f2922;--ink:#ebe2cd;--ink2:#b3a994;--ink3:#7d7464;
-  --line:rgba(235,226,205,.16);--red:#c4473d;--gold:#cfa24d;--jade:#6aa588;--dark:#3b352f;--darktext:#f3ead6;
-  --hi:#3a342e;--sun:#8d7340;--grain:.14;--glass:rgba(42,36,30,.86);
-  --w1:#1a110a;--w2:#4d3823;--w3:#6c4f31;--cap:#0f0905;--edge:rgba(0,0,0,.45);
+  --wall:#0e0c0a;--bg:#25201a;--card:#2f2922;--tile:#3a332b;--mount:#1c1814;--line:rgba(239,230,208,.14);--edge:rgba(0,0,0,.5);
+  --ink:#efe6d0;--ink2:#c8bea8;--ink3:#a89e88;--red:#ef6b5e;--btn:#c4453a;--btntext:#fffaf0;
+  --dark:#403830;--darktext:#f6edd8;--dt2:#d1c6ad;--field:#51473c;--ph:#cdc1a8;--gold:#e3b258;
+  --rod:#a07f58;--rod2:#6f5539;--grain:.1;
 }
 /* 暖 warm cork & coffee */
 [data-theme="warm"]{
-  --wall:#c8ab80;--bg:#f1e4cd;--card:#faf0de;--ink:#3a2a1f;--ink2:#6e5a48;--ink3:#9a8670;
-  --line:rgba(58,42,31,.17);--red:#c0552f;--gold:#c58b3a;--jade:#6d7d3c;--dark:#4a3326;--darktext:#f8ecd6;
-  --hi:#fbf3e3;--sun:#e0a56a;--grain:.2;--glass:rgba(250,240,222,.86);
-  --w1:#3a2012;--w2:#8a5a37;--w3:#b0814f;--cap:#2c170b;--edge:rgba(110,70,30,.3);
+  --wall:#c3a77c;--bg:#f3e6cd;--card:#fbf3e2;--tile:#ecdbb9;--mount:#e4d0a6;--line:rgba(58,42,31,.16);--edge:rgba(110,70,30,.3);
+  --ink:#3a2a1f;--ink2:#5f4b39;--ink3:#6a5642;--red:#a8431d;--btn:#b4491f;--btntext:#fff6e6;
+  --dark:#46301f;--darktext:#f9edd6;--dt2:#dcc9a6;--field:#5a4130;--ph:#cdb893;--gold:#e8b35c;
+  --rod:#7a5233;--rod2:#4d321e;--grain:.14;
 }

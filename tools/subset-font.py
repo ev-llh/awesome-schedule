@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate assets/fonts/dailybrush-subset.woff2 from the Bakudai (莫大毛筆) font.
+"""Regenerate assets/fonts/dailybrush-subset.woff2 from the Bakudai (莫大毛筆) font (we ship the Bold weight: Regular is too thin to read at UI sizes).
 
 Why: the full Regular WOFF2 is ~6.7 MB; we embed a subset so dist/daily-brush.html stays one offline file.
 Licence: Bakudai is SIL OFL 1.1 with Reserved Font Name "Bakudai". A subset is a Modified Version, so the
@@ -8,7 +8,7 @@ Licence: Bakudai is SIL OFL 1.1 with Reserved Font Name "Bakudai". A subset is a
 Usage (run from the repo root, outside the font checkout):
   pip install fonttools brotli
   git clone --depth 1 https://github.com/max32002/bakudaifont /tmp/bakudaifont
-  python3 -I tools/subset-font.py --ttf /tmp/bakudaifont/tw/Bakudai-Regular.ttf [--level2] [-v]
+  python3 -I tools/subset-font.py --ttf /tmp/bakudaifont/tw/Bakudai-Bold.ttf --style Bold [--level2] [-v]
 
 Coverage = ASCII + Big5 punctuation + Big5 level-1 (~5.4k common Traditional chars)
          + every non-ASCII character found in src/ (so all UI text is always covered).
@@ -45,11 +45,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--ttf", required=True)
     ap.add_argument("--out", default=str(ROOT / "assets/fonts/dailybrush-subset.woff2"))
+    ap.add_argument("--style", default="Bold", help="Regular | Medium | Bold (must match the --ttf weight)")
     ap.add_argument("--level2", action="store_true", help="also include Big5 level-2 (~7.6k rarer chars, bigger file)")
     ap.add_argument("-v", "--verbose", action="store_true")
     a = ap.parse_args()
 
-    chars = {chr(c) for c in range(0x20, 0x7F)} | big5_chars(a.level2) | src_chars()
+    # ASCII is excluded on purpose: the @font-face is CJK-only (unicode-range), Latin uses the system UI font.
+    chars = big5_chars(a.level2) | {c for c in src_chars() if ord(c) > 0xFF}
     opts = subset.Options()
     opts.flavor = "woff2"
     opts.name_IDs = ["*"]
@@ -63,8 +65,8 @@ def main():
     sub.subset(font)
 
     # OFL §3: a Modified Version must not use the Reserved Font Name as its primary font name.
-    names = {1: FAMILY, 16: FAMILY, 2: "Regular", 17: "Regular", 3: FAMILY + "-Regular-subset",
-             4: FAMILY + " Regular", 6: FAMILY + "-Regular"}
+    names = {1: FAMILY, 16: FAMILY, 2: a.style, 17: a.style, 3: FAMILY + "-" + a.style + "-subset",
+             4: FAMILY + " " + a.style, 6: FAMILY + "-" + a.style}
     for rec in font["name"].names:
         if rec.nameID in names:
             rec.string = names[rec.nameID]

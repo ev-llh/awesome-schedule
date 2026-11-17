@@ -13,7 +13,7 @@ const { problems } = checkMap();
 if (problems.length) { console.error('MAP out of date (fix docs/MAP.md):\n  ' + problems.join('\n  ')); process.exit(1); }
 
 const font = readFileSync(join(root, 'assets/fonts/dailybrush-subset.woff2')).toString('base64');
-const fontFace = `@font-face{font-family:"DailyBrush";font-weight:400;font-style:normal;font-display:swap;unicode-range:U+2E80-2FDF,U+3000-303F,U+3400-4DBF,U+4E00-9FFF,U+F900-FAFF,U+FF00-FFEF;src:url(data:font/woff2;base64,${font}) format("woff2")}`;
+const fontFace = `@font-face{font-family:"DailyBrush";font-weight:700;font-style:normal;font-display:swap;unicode-range:U+2E80-2FDF,U+3000-303F,U+3400-4DBF,U+4E00-9FFF,U+F900-FAFF,U+FF00-FFEF;src:url(data:font/woff2;base64,${font}) format("woff2")}`;
 const css = files('src/css', '.css').join('\n');
 const js = `(()=>{'use strict';\n${files('src/js', '.js').join('\n')}\n})();`;
 

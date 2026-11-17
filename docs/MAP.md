@@ -38,6 +38,7 @@ Transient (not saved): `ui` = `{view, sheet, addOpen, focusAdd, lastIdx}`. `bloc
 | any user-visible text / add a language | `@map:i18n` | js/00-i18n.js |
 | labels 晨午夜後念常 (one-glyph rule) | `@map:label-policy` | js/00-i18n.js |
 | DOM helpers `$`, `esc` | `@map:util` | js/05-util.js |
+| SVG icons `ic('check')` (sprite in index.template.html) | `@map:icons` | js/05-util.js |
 | saved state shape, storage key, `ui` | `@map:state` | js/10-state.js |
 | first-run example routines | `@map:seed-routines` | js/10-state.js |
 | which block is "now", day boundary | `@map:time-blocks` | js/20-time.js |
@@ -72,8 +73,10 @@ Transient (not saved): `ui` = `{view, sheet, addOpen, focusAdd, lastIdx}`. `bloc
 | backdrop art | `@map:art-svg` · `@map:css-art` | art.svg · css/10-layout.css |
 | font stack / where @font-face comes from (CJK-only `unicode-range`) | `@map:css-fonts` | css/00-theme.css (+ tools/build.mjs) |
 | colours / themes | `@map:css-theme` | css/00-theme.css |
-| scroll paper, grain, edge shading | `@map:css-scroll` | css/10-layout.css |
-| wooden rods | `@map:css-roller` | css/10-layout.css |
+| flat scroll paper (+ faint grain) | `@map:css-scroll` | css/10-layout.css |
+| flat rods (solid bar + 2 knobs) | `@map:css-roller` | css/10-layout.css |
+| focus ring | `@map:css-focus` | css/10-layout.css |
+| brush-glyph style (.gl: Bold + text-stroke, big glyphs only) | `@map:css-brush` | css/20-components.css |
 | sheet unroll animation | `@map:css-sheet-unroll` | css/10-layout.css |
 | header look | `@map:css-header` | css/20-components.css |
 | block tabs + dots | `@map:css-tabs` | css/20-components.css |
@@ -94,7 +97,7 @@ Transient (not saved): `ui` = `{view, sheet, addOpen, focusAdd, lastIdx}`. `bloc
 | Timer wrong after reload | `S.run` is stored as absolute `end` ms; see `@map:timer`, `@map:tick` |
 | Latin text looks wide/loose | brush font must stay CJK-only: `unicode-range` in tools/build.mjs |
 | Font not applied / tofu boxes | `@map:css-fonts`, `assets/fonts/README.md` (subset coverage), rebuild |
-| Scroll rods/edges look off | `@map:css-roller`, `@map:css-scroll` (`#app::after` is the shading) |
+| Scroll rods/edges look off | `@map:css-roller`, `@map:css-scroll` (flat by design: no gradients/shadows) |
 | Sheet won't open/close | `@map:css-sheet-unroll` + `@map:render-sheet` (`.open` class) |
 | Data lost between sessions | localStorage is per browser + file path; `@map:export-import` |
 | New string untranslated | `@map:i18n` — add key to BOTH `en` and `zh` |
@@ -131,5 +134,6 @@ Transient (not saved): `ui` = `{view, sheet, addOpen, focusAdd, lastIdx}`. `bloc
 node tools/build.mjs          # build dist/daily-brush.html
 node tools/check-map.mjs      # verify anchors ⇄ this file
 python3 tests/smoke.py        # needs: pip install playwright (+ a Chrome/Chromium); set CHROME_PATH if needed
-python3 -I tools/subset-font.py --ttf <Bakudai-Regular.ttf>   # regenerate font subset
+python3 -I tools/subset-font.py --ttf <Bakudai-Bold.ttf> --style Bold   # regenerate font subset
+python3 tools/contrast.py                                        # WCAG audit of theme tokens (must be ALL PASS)
 ```

@@ -22,10 +22,10 @@ function renderHead(){
      <div class="seal">課</div>
      <div class="ttl"><b>${t('today')}</b><small>${esc(date)}${t('sub')?' · '+t('sub'):''}</small></div>
      <span id="clock">${pad(d.getHours())}:${pad(d.getMinutes())}</span>
-     <button class="ib" data-act="lang" title="Language">${zh?'EN':'中文'}</button>
-     <button class="ib" data-act="theme" title="${t('theme')}">◐</button>
-     <button class="ib" data-act="sheet" data-s="settings" title="${t('settings')}">${t('set')}</button>
-     ${window.innerWidth>700?`<button class="ib" data-act="popout" title="${t('popout')}">⧉</button>`:''}
+     <button class="ib txt" data-act="lang" title="Language" aria-label="Language">${zh?'EN':'中文'}</button>
+     <button class="ib" data-act="theme" title="${t('theme')}" aria-label="${t('theme')}">${ic('theme')}</button>
+     <button class="ib" data-act="sheet" data-s="settings" title="${t('settings')}" aria-label="${t('settings')}">${ic('sliders')}</button>
+     ${window.innerWidth>700?`<button class="ib" data-act="popout" title="${t('popout')}" aria-label="${t('popout')}">${ic('popout')}</button>`:''}
    </div>
    <div class="tabs">${tabs}</div>
    <div class="prog"><span>${lbl(BLOCKS[cur])} · <span id="bleft">${leftText(pr.left)}</span></span><div class="brush"><i id="bprog" style="width:${Math.round(pr.p*100)}%"></i></div></div>`;
@@ -34,7 +34,7 @@ function renderHead(){
 /* @map:render-rows — one task row */
 function rowHTML(it){
   const d=isDone(it);
-  return `<div class="row ${d?'done':''}"><button class="chk" data-act="toggle" data-id="${it.id}" aria-label="${t('done')}">✓</button><span class="txt" ${d?'':`data-act="now" data-id="${it.id}"`}>${esc(it.text)}</span>${isR(it)?'<span class="tag">日</span>':''}${(!isR(it)&&!d)?`<button class="x" data-act="del" data-id="${it.id}" aria-label="Delete">×</button>`:''}</div>`;
+  return `<div class="row ${d?'done':''}"><button class="chk" data-act="toggle" data-id="${it.id}" aria-label="${t('done')}">${ic('check')}</button><span class="txt" ${d?'':`data-act="now" data-id="${it.id}"`}>${esc(it.text)}</span>${isR(it)?'<span class="tag">日</span>':''}${(!isR(it)&&!d)?`<button class="x" data-act="del" data-id="${it.id}" aria-label="Delete">${ic('x')}</button>`:''}</div>`;
 }
 
 /* @map:render-now-card — the dark card: task, first step, if-then cue, resume note, start/timer buttons */
@@ -45,13 +45,13 @@ function nowCard(it){
     const left=Math.max(0,S.run.end-Date.now()),fin=left<=0;
     const pct=Math.min(100,Math.round((1-left/S.run.total)*100));
     acts=`<div class="tmr"><span id="tmr" class="${fin?'fin':''}">${fin?t('time'):fmtTimer(left)}</span><div class="brush"><i id="tbar" style="width:${pct}%"></i></div></div>
-      <div class="btnrow"><button class="btn primary" data-act="toggle" data-id="${it.id}">✓ ${t('done')}</button><button class="btn" data-act="plus5">${t('plus5')}</button><button class="btn" data-act="stop">${t('stop')}</button></div>`;
+      <div class="btnrow"><button class="btn primary" data-act="toggle" data-id="${it.id}">${ic('check')} ${t('done')}</button><button class="btn" data-act="plus5">${t('plus5')}</button><button class="btn" data-act="stop">${t('stop')}</button></div>`;
   }else{
     acts=`<div class="btnrow"><select id="tmin" aria-label="${t('timer')}">${[5,10,15,25].map(m=>`<option value="${m}" ${m===S.timer?'selected':''}>${m} ${t('min')}</option>`).join('')}</select>
-      <button class="btn primary" data-act="start">▶ ${t('start')}</button><button class="btn" data-act="toggle" data-id="${it.id}">✓ ${t('done')}</button><button class="btn" data-act="skip">${t('notNow')}</button></div>`;
+      <button class="btn primary" data-act="start">${ic('play')} ${t('start')}</button><button class="btn" data-act="toggle" data-id="${it.id}">${ic('check')} ${t('done')}</button><button class="btn" data-act="skip">${t('notNow')}</button></div>`;
   }
   const note=(running||it.note)?`<label class="fld"><span>${t('resume')}</span><input data-f="note" value="${esc(it.note||'')}" placeholder="${t('resumePh')}" maxlength="120"></label>`:'';
-  return `<section class="now" data-id="${it.id}"><i class="motto">一事一刻</i>
+  return `<section class="now" data-id="${it.id}">
     <div class="lab">${t('now')}${S.lang==='en'?' · 當下':''}</div><h2>${esc(it.text)}</h2>
     <label class="fld"><span>${t('firstStep')}</span><input data-f="step" value="${esc(it.step||'')}" placeholder="${t('firstStepPh')}" maxlength="100"></label>
     <label class="fld"><span>${t('cue')}</span><input data-f="cue" value="${esc(it.cue||'')}" placeholder="${t('cuePh')}" maxlength="120"></label>
@@ -80,15 +80,15 @@ function renderMain(){
     h+=`<form class="addf" data-form="add"><input type="text" name="text" placeholder="${t('addPh')}" maxlength="120" autocomplete="off" required>
       <div class="addrow"><select name="block">${blockOptions(BLOCKS[Math.max(ui.view,curIdx())])}</select>
       <label><input type="checkbox" name="routine"> ${t('every')}</label>
-      <button class="btn primary">${t('addGo')}</button><button type="button" class="btn" data-act="addClose">×</button></div></form>`;
-  }else h+=`<button class="addbtn" data-act="addOpen">${t('add')}</button>`;
+      <button class="btn primary">${t('addGo')}</button><button type="button" class="btn" data-act="addClose" aria-label="${t('close')}">${ic('x')}</button></div></form>`;
+  }else h+=`<button class="addbtn" data-act="addOpen">${ic('plus')} ${t('add')}</button>`;
   $('#main').innerHTML=h;
   if(ui.focusAdd){const i=$('.addf input[name=text]');if(i)i.focus();ui.focusAdd=false;}
 }
 
 /* @map:render-chips — footer buttons 後 念 常 with counts (zh: glyph only, en: glyph + word) */
 function renderChips(){
-  const zh=S.lang==='zh',chip=(k,n)=>`<button class="chip" data-act="sheet" data-s="${k}" aria-label="${t(k)}"><b>${GL[k]}</b>${zh?'':t(k)}<u>${n||''}</u></button>`;
+  const zh=S.lang==='zh',chip=(k,n)=>`<button class="chip" data-act="sheet" data-s="${k}" aria-label="${t(k)}"><b>${GL[k]}</b>${zh?'':`<small>${t(k)}</small>`}${n?`<u>${n}</u>`:''}</button>`;
   $('#chips').innerHTML=chip('later',S.tasks.filter(x=>x.block==='later').length)+chip('parked',S.parked.length)+chip('routines',S.routines.length);
   $('#parkin').placeholder=t('parkPh');
 }
@@ -102,11 +102,11 @@ function renderSheet(){
   let body='';
   if(s==='later'){
     const L=S.tasks.filter(x=>x.block==='later').sort((a,b)=>(a.ord||0)-(b.ord||0));
-    body=`<p class="empty" style="padding:0 0 8px;text-align:left;font-size:14px">${t('laterNote')}</p>`+(L.length?L.map(x=>`<div class="srow"><span>${esc(x.text)}</span><button class="btn" data-act="laterHere" data-id="${x.id}">${t('here')}</button><button class="x" data-act="del" data-id="${x.id}">×</button></div>`).join(''):`<div class="empty">${t('emptyLater')}</div>`);
+    body=`<p class="empty" style="padding:0 0 8px;text-align:left;font-size:14px">${t('laterNote')}</p>`+(L.length?L.map(x=>`<div class="srow"><span>${esc(x.text)}</span><button class="btn" data-act="laterHere" data-id="${x.id}">${t('here')}</button><button class="x" data-act="del" data-id="${x.id}" aria-label="Delete">${ic('x')}</button></div>`).join(''):`<div class="empty">${t('emptyLater')}</div>`);
   }else if(s==='parked'){
-    body=S.parked.length?S.parked.map(x=>`<div class="srow"><span>${esc(x.text)}</span><button class="btn" data-act="parkLater" data-id="${x.id}">${t('toLater')}</button><button class="x" data-act="parkDel" data-id="${x.id}">×</button></div>`).join('')+`<div style="padding-top:12px"><button class="btn" data-act="parkClear">${t('clearAll')}</button></div>`:`<div class="empty">${t('emptyParked')}</div>`;
+    body=S.parked.length?S.parked.map(x=>`<div class="srow"><span>${esc(x.text)}</span><button class="btn" data-act="parkLater" data-id="${x.id}">${t('toLater')}</button><button class="x" data-act="parkDel" data-id="${x.id}" aria-label="Delete">${ic('x')}</button></div>`).join('')+`<div style="padding-top:12px"><button class="btn" data-act="parkClear">${t('clearAll')}</button></div>`:`<div class="empty">${t('emptyParked')}</div>`;
   }else if(s==='routines'){
-    body=(S.routines.length?S.routines.slice().sort((a,b)=>BLOCKS.indexOf(a.block)-BLOCKS.indexOf(b.block)||(a.ord||0)-(b.ord||0)).map(r=>`<div class="srow"><small>${GL[r.block]}</small><span>${esc(r.text)}</span><button class="x" data-act="rtDel" data-id="${r.id}">×</button></div>`).join(''):`<div class="empty">${t('emptyRt')}</div>`)+
+    body=(S.routines.length?S.routines.slice().sort((a,b)=>BLOCKS.indexOf(a.block)-BLOCKS.indexOf(b.block)||(a.ord||0)-(b.ord||0)).map(r=>`<div class="srow"><small>${GL[r.block]}</small><span>${esc(r.text)}</span><button class="x" data-act="rtDel" data-id="${r.id}" aria-label="Delete">${ic('x')}</button></div>`).join(''):`<div class="empty">${t('emptyRt')}</div>`)+
      `<form class="addf" data-form="routine" style="margin-top:12px"><input type="text" name="text" placeholder="${t('addPh')}" maxlength="120" required autocomplete="off"><div class="addrow"><select name="block">${BLOCKS.map(b=>`<option value="${b}">${lbl(b)}</option>`).join('')}</select><button class="btn primary">${t('addRt')}</button></div></form>`;
   }else if(s==='settings'){
     /* @map:settings — cap, block start hours, default timer, chime, export/import */
@@ -121,7 +121,7 @@ function renderSheet(){
       <label>${t('chime')}</label><input type="checkbox" data-set="chime" ${S.chime?'checked':''}>
     </div><div class="btnrow" style="margin-top:16px"><button class="btn" data-act="export">${t('exp')}</button><button class="btn" data-act="import">${t('imp')}</button></div>`;
   }
-  el.innerHTML=`<div class="roller"></div><h3><span>${title}</span><button class="ib" data-act="closeSheet" aria-label="${t('close')}">×</button></h3><div class="sbody">${body}</div>`;
+  el.innerHTML=`<div class="roller"></div><h3><span>${title}</span><button class="ib" data-act="closeSheet" aria-label="${t('close')}">${ic('x')}</button></h3><div class="sbody">${body}</div>`;
 }
 
 /* @map:render-all — single entry point; call after ANY state change. Typing in Now-card fields does NOT re-render (see actions-input). */

@@ -8,3 +8,6 @@
 - Coverage: ASCII + Big5 punctuation + Big5 level-1 (~5.4k common Traditional characters) + every non-ASCII character used in `src/`. Anything else (rare, Simplified, emoji) falls back to system serif fonts. For wider coverage run the subset script with `--level2` (larger file).
 - The embedded @font-face is limited to CJK ranges (`unicode-range` in `tools/build.mjs`): Bakudai's Latin glyphs are very wide and loosely spaced, so English text uses the serif fallback in the `--serif` stack.
 - The full font is not stored here (≈14 MB TTF). Get it from the upstream repo.
+
+
+Current subset = Bakudai **Bold** (CJK only; Latin uses the system font). Rebuild: `python3 -I tools/subset-font.py --ttf <Bakudai-Bold.ttf> --style Bold`.
