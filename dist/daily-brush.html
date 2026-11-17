@@ -22,27 +22,27 @@
 /* @map:css-theme — flat colour tokens. Three themes via <html data-theme="paper|night|warm">.
    RULE: every text token pair must be >= 4.5:1 → verify with `python3 tools/contrast.py` after any change.
    Palette = the pre-a2c724c (13ff8a7) design; only failing text pairs were darkened/lightened in-hue to pass.
-   bg/card/tile = surfaces (card/tile = translucent 'glass') · hi = input fill · sun/jade = art + done dots · w1/w3 = rod highlights · ink/ink2/ink3 = text · btn/btntext = primary button · dark/darktext/dt2/field/ph/gold = the Now card (always dark) · rod/rod2/w1/w3/edge = scroll */
+   bg/card/tile = surfaces (card/tile = translucent 'glass') · hi = input fill · sun/jade = art + done dots · rodhi/rod/cap = rod top light, rod body, bottom-rod caps (quiet frame: paper/warm <= 6:1, night >= 1.8:1) · ink/ink2/ink3 = text · btn/btntext = primary button · dark/darktext/dt2/field/ph/gold = the Now card (always dark) · rodhi/rod/cap/edge = scroll */
 /* 宣紙 xuan paper: warm beige-yellow (default) */
 :root,[data-theme="paper"]{
   --wall:#b9a77f;--bg:#efe2bd;--card:rgba(247,238,210,.84);--tile:rgba(247,238,210,.84);--hi:#f8f1db;--line:rgba(70,50,25,.2);--edge:rgba(90,62,25,.3);
   --ink:#2b2218;--ink2:#5d5039;--ink3:#70634b;--red:#a4322a;--btn:#a4322a;--btntext:#f8ecd8;--jade:#4b7d64;--sun:#caa05a;
   --dark:#2b231b;--darktext:#f1e6c8;--dt2:#b6ac94;--field:#3e3730;--ph:#aaa08c;--gold:#b5883a;
-  --rod:#7d5836;--rod2:#2a1a0e;--w1:#32200f;--w3:#a37c4e;--grain:.4;
+  --rodhi:#b8945f;--rod:#8c6a45;--cap:#74522f;--grain:.4;
 }
 /* 墨夜 night ink */
 [data-theme="night"]{
   --wall:#0f0d0b;--bg:#26211b;--card:rgba(42,36,30,.86);--tile:rgba(42,36,30,.86);--hi:#3a342e;--line:rgba(235,226,205,.16);--edge:rgba(0,0,0,.45);
   --ink:#ebe2cd;--ink2:#b3a994;--ink3:#979083;--red:#d3776f;--btn:#ba433a;--btntext:#f8ecd8;--jade:#6aa588;--sun:#8d7340;
   --dark:#3b352f;--darktext:#f3ead6;--dt2:#bdb6a6;--field:#4d4742;--ph:#c0b8a9;--gold:#cfa24d;
-  --rod:#8a6841;--rod2:#0f0905;--w1:#1a110a;--w3:#a07f58;--grain:.14;
+  --rodhi:#7d6447;--rod:#665038;--cap:#5e4834;--grain:.14;
 }
 /* 暖 warm cork & coffee */
 [data-theme="warm"]{
   --wall:#c8ab80;--bg:#f1e4cd;--card:rgba(250,240,222,.86);--tile:rgba(250,240,222,.86);--hi:#fbf3e3;--line:rgba(58,42,31,.17);--edge:rgba(110,70,30,.3);
   --ink:#3a2a1f;--ink2:#6e5a48;--ink3:#746454;--red:#a74a29;--btn:#a74a29;--btntext:#f8ecd8;--jade:#6d7d3c;--sun:#e0a56a;
   --dark:#4a3326;--darktext:#f8ecd6;--dt2:#c5b6a3;--field:#5a453a;--ph:#c4b6a4;--gold:#cb974e;
-  --rod:#8a5a37;--rod2:#2c170b;--w1:#3a2012;--w3:#b0814f;--grain:.2;
+  --rodhi:#c09062;--rod:#946640;--cap:#7a4f2f;--grain:.2;
 }
 
 *{box-sizing:border-box}
@@ -63,32 +63,33 @@ button{cursor:pointer}
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .22  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
   repeating-linear-gradient(90deg,transparent 0 7px,rgba(120,90,40,.05) 7px 8px)}
 #app::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:4;background:
-  linear-gradient(to bottom,rgba(50,32,10,.34),transparent 52px),
-  linear-gradient(to top,rgba(50,32,10,.34),transparent 52px),
+  linear-gradient(to bottom,rgba(50,32,10,.10),transparent 18px),
+  linear-gradient(to top,rgba(50,32,10,.12),transparent 22px),
   linear-gradient(to right,var(--edge),transparent 24px),
   linear-gradient(to left,var(--edge),transparent 24px)}
 
-/* @map:css-roller — wooden rod with dark end caps (top/bottom of app, top of each sheet); wood tones w1/rod/w3, caps rod2 */
-.roller{position:relative;z-index:6;flex:none;height:18px;margin:5px 8px 0;border-radius:9px;
-  background:linear-gradient(to bottom,var(--w1),var(--rod) 28%,var(--w3) 50%,var(--rod) 72%,var(--w1));box-shadow:0 3px 8px rgba(0,0,0,.35)}
-.roller::before,.roller::after{content:"";position:absolute;top:-4px;bottom:-4px;width:12px;border-radius:5px;background:var(--rod2);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
-.roller::before{left:-8px}
-.roller::after{right:-8px}
-#app>.roller:nth-of-type(2){margin:0 8px 5px}
+/* @map:css-roller — quiet rods, flush with the paper edge, full paper width, lit from the top (rodhi -> rod; nothing darker than --rod but the caps).
+   top (and each sheet's top) = flat 8px 天杆 without caps · .roller.bot = 12px round 地軸 with small caps inside #app */
+.roller{position:relative;z-index:6;flex:none;height:8px;margin:0;border-radius:0 0 3px 3px;
+  background:linear-gradient(to bottom,var(--rodhi),var(--rod));box-shadow:0 1px 2px rgba(40,24,8,.12)}
+.roller.bot{height:12px;border-radius:0;
+  background:linear-gradient(to bottom,var(--rodhi) 0%,color-mix(in srgb,var(--rodhi) 45%,var(--rod)) 35%,var(--rod) 100%);box-shadow:0 -1px 2px rgba(40,24,8,.10)}
+.roller.bot::before,.roller.bot::after{content:"";position:absolute;top:-2px;bottom:0;width:6px;border-radius:2px 2px 0 0;background:linear-gradient(to bottom,var(--rod),var(--cap))}
+.roller.bot::before{left:0}
+.roller.bot::after{right:0}
 
 /* @map:css-art — ink-wash sun, mountains and mist from src/art.svg */
 .art{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 header,main,footer{position:relative;z-index:2}
-header{padding:4px 14px 6px}
+header{padding:12px 14px 6px}
 main{flex:1;overflow:auto;padding:6px 14px 12px;display:flex;flex-direction:column;gap:10px}
 main>*{flex:none}
 footer{padding:8px 14px 8px;background:linear-gradient(to top,var(--tile) 55%,transparent)}
 
 /* @map:css-sheet-unroll — Later / Parked / Routines / Settings: a second scroll that unrolls upward */
-.sheet{position:absolute;left:0;right:0;bottom:23px;height:0;z-index:20;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);border-top:1px solid var(--edge);transition:height .32s cubic-bezier(.2,.8,.2,1)}
+.sheet{position:absolute;left:0;right:0;bottom:12px;height:0;z-index:20;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);border-top:1px solid var(--edge);transition:height .32s cubic-bezier(.2,.8,.2,1)}
 .sheet.open{height:80%}
-.sheet .roller{margin-top:0}
-.sheet h3{margin:0;padding:4px 16px 6px;display:flex;justify-content:space-between;align-items:center}
+.sheet h3{margin:0;padding:10px 16px 6px;display:flex;justify-content:space-between;align-items:center}
 .sheet h3 span{font-family:var(--brush);font-size:30px;line-height:1.1}
 .sbody{flex:1;overflow:auto;padding:0 14px 14px}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition:none!important}}
