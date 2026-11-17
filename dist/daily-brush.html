@@ -107,12 +107,12 @@ footer{padding:8px 14px 8px;background:linear-gradient(to top,var(--tile) 55%,tr
 .ib.txt{font-size:16px;padding:0 6px}
 .ib:hover{background:var(--line)}
 
-/* @map:css-tabs — 晨 午 夜 tiles: glyph fills the tile (iOS-icon style). dots: hollow ring = pending, solid dot = done (shape, not colour alone) */
+/* @map:css-tabs — 晨 午 夜 tiles: glyph fills the tile (iOS-icon style; glyph ~67%, glyph+word ~86% of tile height). dots sit top-left. dots: hollow ring = pending, solid dot = done (shape, not colour alone) */
 .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 8px}
-.tab{position:relative;border:1px solid var(--line);background:var(--tile);border-radius:14px;padding:3px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink)}
-.tab b{font-size:42px}
-.tab small{font-size:15px;line-height:1.15;color:var(--ink2);margin-top:1px}
-.tab .dots{display:flex;gap:4px;height:8px;margin-top:2px;align-items:center}
+.tab{position:relative;height:78px;border:1px solid var(--line);background:var(--tile);border-radius:14px;padding:0 2px;gap:1px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink)}
+.tab b{font-size:52px}
+.tab small{font-size:15px;line-height:1;color:var(--ink2)}
+.tab .dots{position:absolute;top:7px;left:7px;display:flex;gap:3px;height:8px;align-items:center}
 .tab .dots i{width:8px;height:8px;border-radius:50%;border:2px solid currentColor;box-sizing:border-box}
 .tab .dots i.d{background:var(--jade);border-color:var(--jade)}
 .tab.on{background:var(--dark);border-color:var(--dark);color:var(--darktext)}
@@ -180,9 +180,9 @@ footer{padding:8px 14px 8px;background:linear-gradient(to top,var(--tile) 55%,tr
 .park input{width:100%;height:42px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 14px;outline:none;font-size:16px}
 .park input::placeholder{color:var(--ink3);opacity:1}
 .chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.chip{position:relative;border:1px solid var(--line);background:var(--tile);border-radius:12px;padding:2px;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink)}
-.chip b{font-size:32px}
-.chip small{font-size:14px;line-height:1.15;color:var(--ink2)}
+.chip{position:relative;height:56px;border:1px solid var(--line);background:var(--tile);border-radius:12px;padding:0 2px;gap:1px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink)}
+.chip b{font-size:36px}
+.chip small{font-size:13px;line-height:1;color:var(--ink2)}
 .chip u{position:absolute;top:-5px;right:-3px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--btn);color:var(--btntext);font-size:12px;text-decoration:none;display:grid;place-items:center}
 
 /* @map:css-sheet-content — inside the unrolled sheet */
